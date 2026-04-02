@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="饺子的神奇小窝：动漫+科技风项目平台，支持注册登录、管理员发布项目、跨设备访问、SEO可检索。" />
+  <title>注册 - 饺子的神奇小窝</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/a2e0b9e4f8.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg">
+  <div class="card" aria-live="polite">
+    <h1>欢迎来到 饺子的神奇小窝</h1>
+    <p>首次访问请创建账号。唯一管理员账号：<strong>gys112700</strong></p>
+    <% if (error) { %>
+      <div class="error"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
+    <% } %>
+    <form method="post" action="/register">
+      <label>用户名</label>
+      <input type="text" name="username" placeholder="输入用户名" required />
+      <label>密码</label>
+      <input type="password" name="password" placeholder="输入密码" required />
+      <label>确认密码</label>
+      <input type="password" name="confirm" placeholder="再次输入密码" required />
+      <button type="submit" class="btn">注册</button>
+    </form>
+    <p>已有账号？<a href="/login">登录</a></p>
+  </div>
+</body>
+</html>

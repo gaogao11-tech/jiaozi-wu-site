@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="管理员创建新项目页面。" />
+  <title>创建项目 - 饺子的神奇小窝</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/a2e0b9e4f8.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg">
+  <header class="topbar">
+    <div class="brand"><i class="fas fa-fire"></i> 饺子的神奇小窝</div>
+    <nav>
+      <a href="/dashboard">首页</a>
+      <a href="/logout">登出（<%= user.username %>）</a>
+    </nav>
+  </header>
+  <main class="content">
+    <div class="card">
+      <h1>创建新项目</h1>
+      <% if (error) { %>
+        <div class="error"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
+      <% } %>
+      <form method="post" action="/create">
+        <label>项目名称</label>
+        <input type="text" name="title" required />
+
+        <label>项目描述</label>
+        <textarea name="description" rows="4" required></textarea>
+
+        <label>项目展示图 URL</label>
+        <input type="url" name="imageUrl" placeholder="可选" />
+
+        <label>功能示意图 URL</label>
+        <input type="url" name="diagramUrl" placeholder="可选" />
+
+        <label>项目链接</label>
+        <input type="url" name="linkUrl" required />
+
+        <label>演示视频 URL</label>
+        <input type="url" name="videoUrl" placeholder="可选" />
+
+        <label>标签（逗号分隔）</label>
+        <input type="text" name="tags" placeholder="例如: 动漫, 科技" />
+
+        <button class="btn" type="submit">创建项目</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

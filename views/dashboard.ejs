@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="饺子的神奇小窝项目总览，支持跨设备访问与搜索引擎收录。" />
+  <title>仪表盘 - 饺子的神奇小窝</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/a2e0b9e4f8.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg">
+  <header class="topbar">
+    <div class="brand"><i class="fas fa-fire"></i> 饺子的神奇小窝</div>
+    <nav>
+      <a href="/dashboard">首页</a>
+      <% if (user && user.role === 'admin') { %><a href="/create">创建项目</a><% } %>
+      <a href="/logout">登出（<%= user.username %>）</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <section class="hero">
+      <h1>动漫科技风项目展示</h1>
+      <p>欢迎 <strong><%= user.username %></strong>，这里是你的跨设备项目展示平台。</p>
+      <form class="search" action="/dashboard" method="get">
+        <input type="search" name="q" value="<%= query %>" placeholder="搜索项目、标签..." />
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </section>
+
+    <section class="cards">
+      <% if (projects.length === 0) { %>
+        <article class="card-item empty">暂无项目，管理员请先创建一个。</article>
+      <% } %>
+      <% projects.forEach((p) => { %>
+        <article class="card-item">
+          <img src="<%= p.imageUrl %>" alt="项目展示图" onerror="this.src='/images/default.png';" />
+          <div class="meta">
+            <h2><a href="/projects/<%= p.id %>"><%= p.title %></a></h2>
+            <p><%= p.description %></p>
+            <div class="tags"><%= p.tags.join(', ') %></div>
+            <div class="actions">
+              <a class="btn-secondary" href="<%= p.linkUrl %>" target="_blank" rel="noopener">项目链接</a>
+              <% if (p.videoUrl) { %><a class="btn-secondary" href="<%= p.videoUrl %>" target="_blank" rel="noopener">演示视频</a><% } %>
+            </div>
+          </div>
+        </article>
+      <% }); %>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 饺子的神奇小窝 | 维护SEO，支持robots与sitemap</p>
+  </footer>
+</body>
+</html>

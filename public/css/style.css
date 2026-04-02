@@ -1,0 +1,146 @@
+:root {
+  --bg: #050a15;
+  --card: rgba(14, 18, 38, .85);
+  --border: rgba(84, 220, 255, 0.35);
+  --text: #e4f9ff;
+  --accent: #5c8fff;
+  --accent2: #81ffb4;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Heiti SC", "PingFang SC", sans-serif;
+  background: radial-gradient(circle at top, #0f1836 0%, #02040f 60%);
+  color: var(--text);
+  min-height: 100vh;
+}
+.bg {
+  min-height: 100vh;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: linear-gradient(90deg, rgba(37, 81, 160, 0.85), rgba(29, 25, 68, 0.85));
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand {
+  font-size: 1.15rem;
+  letter-spacing: 0.08rem;
+}
+.topbar nav a {
+  color: var(--text);
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px 11px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.15);
+  transition: all .2s ease;
+}
+.topbar nav a:hover {
+  background: rgba(70, 187, 255, 0.25);
+  border-color: var(--accent);
+}
+.card, .detail-card, .project-card, .hero, .search {
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 0 24px rgba(20, 255, 255, .08);
+}
+.card h1, .detail-card h1, .hero h1 {
+  margin-top: 0;
+  color: #d4ecff;
+}
+label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+input, textarea, button {
+  font-size: 1rem;
+  border: 1px solid rgba(112, 195, 255, .35);
+  border-radius: 10px;
+  padding: 10px 12px;
+  width: 100%;
+  background: rgba(5, 9, 26, 0.85);
+  color: #edf8ff;
+}
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(77, 155, 255, .25);
+}
+.btn, .btn-secondary {
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  margin-top: 14px;
+}
+.btn { background: linear-gradient(120deg, #4f76ff, #29ffc2); }
+.btn-secondary { background: rgba(63, 105, 220, .72); text-decoration: none; }
+.btn:hover, .btn-secondary:hover { opacity: .92; }
+.error {
+  color: #ff9696;
+  background: rgba(199, 57, 57, .18);
+  border: 1px solid rgba(255, 128, 128, .28);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+}
+.content { padding: 0 16px 32px; }
+.hero { overflow: hidden; }
+.hero p { margin: 6px 0 14px; }
+.search {
+  display: flex;
+  gap: 10px;
+}
+.search input { flex: 1; }
+.search button {
+  width: 46px;
+  border-radius: 10px;
+  background: rgba(41, 212, 182, .95);
+  border: none;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.card-item {
+  background: rgba(20, 28, 55, .8);
+  border: 1px solid rgba(85, 180, 255, .2);
+  border-radius: 14px;
+}
+.card-item img { width: 100%; height: 160px; object-fit: cover; border-top-left-radius: 12px; border-top-right-radius: 12px; }
+.card-item .meta { padding: 12px; }
+.card-item .meta h2 { margin: 0 0 8px; }
+.card-item .meta p { font-size: .95rem; color: #bce6ff; }
+.card-item .tags { margin-top: 8px; font-size: .84rem; color: #81f2ff; }
+.actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+.footer {
+  text-align: center;
+  font-size: 0.85rem;
+  padding: 14px 0;
+  color: #9eb9d9;
+}
+.detail-card img.wide { width: 100%; height: auto; margin: 12px 0; border-radius: 12px; }
+.info { margin: 14px 0; display: flex; gap: 10px; }
+@media (max-width: 768px) {
+  .topbar { flex-direction: column; align-items: flex-start; }
+  .topbar nav { margin-top: 10px; }
+  .cards { grid-template-columns: 1fr; }
+  .card, .detail-card, .hero, .search { margin: 12px 6px; padding: 16px; }
+}

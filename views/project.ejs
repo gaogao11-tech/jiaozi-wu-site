@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="项目详情页面：<%= project.title %>" />
+  <title><%= project.title %> - 饺子的神奇小窝</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/a2e0b9e4f8.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg">
+  <header class="topbar">
+    <div class="brand"><i class="fas fa-fire"></i> 饺子的神奇小窝</div>
+    <nav>
+      <a href="/dashboard">首页</a>
+      <a href="/logout">登出（<%= user.username %>）</a>
+    </nav>
+  </header>
+  <main class="content">
+    <article class="detail-card">
+      <h1><%= project.title %></h1>
+      <p class="subtitle"><%= project.description %></p>
+      <img class="wide" src="<%= project.diagramUrl %>" alt="功能示意图" onerror="this.src='/images/default.png';" />
+      <section class="info">
+        <a class="btn-secondary" href="<%= project.linkUrl %>" target="_blank" rel="noopener">访问项目</a>
+        <% if (project.videoUrl) { %>
+          <a class="btn-secondary" href="<%= project.videoUrl %>" target="_blank" rel="noopener">观看演示</a>
+        <% } %>
+      </section>
+      <p>标签：<%= project.tags.join(', ') %></p>
+    </article>
+  </main>
+</body>
+</html>

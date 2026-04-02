@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="饺子的神奇小窝登录页面，动漫科技风UI。" />
+  <title>登录 - 饺子的神奇小窝</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/a2e0b9e4f8.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg">
+  <div class="card">
+    <h1>登录</h1>
+    <% if (error) { %>
+      <div class="error"><i class="fas fa-exclamation-triangle"></i> <%= error %></div>
+    <% } %>
+    <form method="post" action="/login">
+      <label>用户名</label>
+      <input type="text" name="username" placeholder="用户名" required />
+      <label>密码</label>
+      <input type="password" name="password" placeholder="密码" required />
+      <button type="submit" class="btn">登录</button>
+    </form>
+    <p>还没有账号？<a href="/register">注册</a></p>
+  </div>
+</body>
+</html>
