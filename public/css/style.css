@@ -1,10 +1,12 @@
 :root {
-  --bg: #031121;
-  --card: rgba(255, 255, 255, 0.96);
-  --border: rgba(0, 132, 204, 0.25);
-  --text: #f1f5fc;
-  --accent: #00b4ff;
-  --accent2: #0077cc;
+  --bg: #121212;
+  --card: #181818;
+  --border: rgba(255, 255, 255, 0.1);
+  --text: #ffffff;
+  --accent: #1DB954;
+  --accent2: #1ed760;
+  --secondary: #535353;
+  --hover: rgba(255, 255, 255, 0.1);
 }
 * {
   box-sizing: border-box;
@@ -12,21 +14,12 @@
 body {
   margin: 0;
   font-family: "Segoe UI", "Heiti SC", "PingFang SC", -apple-system, sans-serif;
-  background: linear-gradient(to bottom, rgba(2,11,39,0.9), rgba(0, 35, 80, 0.65)),
-              url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2100&q=80');
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(135deg, #121212 0%, #1a1a1a 50%, #0a0a0a 100%);
   background-attachment: fixed;
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
-  animation: cruiseScroll 20s linear infinite;
-}
-@keyframes cruiseScroll {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 body::before {
@@ -47,25 +40,45 @@ body::before {
   50% { transform: translateY(10px); }
 }
 
-body::after {
-  content: '';
+.sidebar {
   position: fixed;
-  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(to top, rgba(0, 51, 102, 0.6), transparent);
-  pointer-events: none;
-  z-index: 0;
+  top: 80px;
+  width: 240px;
+  height: calc(100vh - 80px);
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  overflow-y: auto;
+  z-index: 50;
 }
-.bg {
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar nav a {
+  color: var(--secondary);
+  text-decoration: none;
+  padding: 12px 24px;
+  margin: 4px 8px;
+  border-radius: 8px;
+  transition: all .2s ease;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+.sidebar nav a:hover {
+  background: var(--hover);
+  color: var(--text);
+}
+.sidebar nav a.active {
+  background: var(--hover);
+  color: var(--accent);
+}
+.content {
+  margin-left: 240px;
+  padding: 80px 32px 120px 32px;
   min-height: 100vh;
-  background: transparent;
-}
-.card {
-  background: rgba(10, 28, 67, 0.88);
-  border: 1px solid rgba(120, 182, 235, 0.35);
-  color: #f4f8ff;
 }
 
 }
@@ -74,14 +87,15 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 28px;
-  background: rgba(255, 255, 255, 0.95);
-  border-bottom: 3px solid var(--accent);
-  position: sticky;
+  padding: 16px 32px;
+  background: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid var(--border);
+  position: fixed;
   top: 0;
-  z-index: 10;
-  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
-  backdrop-filter: blur(10px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
 }
 .brand {
   font-size: 1.4rem;
@@ -94,35 +108,33 @@ body::after {
   color: var(--text);
   margin-left: 24px;
   text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 6px;
-  border: 2px solid transparent;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid transparent;
   transition: all .3s ease;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.95rem;
-  letter-spacing: 0.05rem;
 }
 .topbar nav a:hover {
-  background: rgba(0, 102, 204, 0.1);
+  background: var(--hover);
   border-color: var(--accent);
   color: var(--accent);
-  transform: translateY(-2px);
 }
 
 .card, .detail-card, .project-card, .hero, .search {
-  max-width: 960px;
-  margin: 28px auto;
-  padding: 28px;
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 32px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 102, 204, 0.12);
-  transition: all .5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all .3s ease;
 }
 .card:hover, .detail-card:hover {
-  transform: translateY(-12px) scale(1.01);
-  box-shadow: 0 20px 60px rgba(0, 102, 204, 0.25);
-  border-color: rgba(0, 102, 204, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  border-color: var(--accent);
 }
 .card h1, .detail-card h1, .hero h1 {
   margin-top: 0;
@@ -172,30 +184,29 @@ input:focus, textarea:focus {
   box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
   text-transform: uppercase;
 }
-.btn { 
-  background: linear-gradient(135deg, #0066cc, #0099ff);
-  transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+.btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  transition: all .3s ease;
 }
-.btn-secondary { 
-  background: rgba(0, 102, 204, 0.85);
-  color: #fff;
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--text);
   text-decoration: none;
-  transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all .3s ease;
 }
 .btn:hover {
-  transform: translateY(-5px) scale(1.06);
-  box-shadow: 0 12px 36px rgba(0, 102, 204, .5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(29, 185, 84, 0.4);
 }
 .btn:active {
-  transform: translateY(-2px) scale(1.03);
+  transform: translateY(0px);
 }
 .btn-secondary:hover {
-  transform: translateY(-5px) scale(1.06);
-  background: var(--accent);
-  box-shadow: 0 12px 36px rgba(0, 102, 204, .4);
+  background: var(--hover);
+  transform: translateY(-2px);
 }
 .btn-secondary:active {
-  transform: translateY(-2px) scale(1.03);
+  transform: translateY(0px);
 }
 .inline-form { display: inline-block; }
 .btn-delete { 
@@ -371,17 +382,17 @@ input:focus, textarea:focus {
   .brand { font-size: 1.1rem; }
 }
 
-/* --- Norwegian Cruise Ocean Theme --- */
-.ocean-hero {
+/* --- Spotify Theme --- */
+.spotify-hero {
   position: relative;
-  min-height: 420px;
+  min-height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
+  background: linear-gradient(135deg, #1DB954 0%, #121212 100%);
   overflow: hidden;
   margin-bottom: 0;
-  padding: 0;
+  padding: 120px 24px 80px 24px;
 }
 .hero-bg {
   position: absolute;
@@ -426,12 +437,12 @@ input:focus, textarea:focus {
   color: #fff;
   padding: 80px 24px 60px 24px;
 }
-.ocean-hero h1 {
-  font-size: 2.8rem;
+.spotify-hero h1 {
+  font-size: 3.5rem;
   font-weight: 900;
-  letter-spacing: 2px;
-  margin-bottom: 18px;
-  text-shadow: 0 8px 32px rgba(0,51,102,0.25);
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 .ocean-hero p {
   font-size: 1.25rem;
@@ -453,16 +464,16 @@ input:focus, textarea:focus {
 .ocean-card {
   position: relative;
   overflow: hidden;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0,102,204,0.13);
-  background: rgba(255,255,255,0.98);
-  border: 1.5px solid rgba(0,102,204,0.13);
-  transition: all .5s cubic-bezier(0.34,1.56,0.64,1);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: all .3s ease;
 }
 .ocean-card:hover {
-  transform: translateY(-18px) scale(1.03);
-  box-shadow: 0 24px 64px rgba(0,102,204,0.22);
-  border-color: #0099ff44;
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border-color: var(--accent);
 }
 .card-img-wrap {
   position: relative;

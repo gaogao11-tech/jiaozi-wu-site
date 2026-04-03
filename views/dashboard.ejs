@@ -6,35 +6,52 @@
   <meta name="description" content="饺子的神奇小窝项目总览，支持跨设备访问与搜索引擎收录。" />
   <title>仪表盘 - 饺子的神奇小窝</title>
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <script src="https://kit.fontawesome.com/a2e0b9e4f8.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+  </script>
 </head>
 <body class="bg">
   <%- include('partials/header', { user: user }) %>
-
+  <aside class="sidebar">
+    <nav>
+      <a href="/dashboard" class="active">🏠 首页</a>
+      <a href="#search">🔍 搜索</a>
+      <% if (user && user.role === 'admin') { %><a href="/create">➕ 创建项目</a><% } %>
+      <a href="#library">📚 我的项目</a>
+      <a href="#liked">❤️ 收藏</a>
+    </nav>
+  </aside>
   <main class="content">
     <%- include('partials/hero') %>
     <form class="search" action="/dashboard" method="get" style="max-width:600px;margin:0 auto 32px auto;">
       <input type="search" name="q" value="<%= query %>" placeholder="搜索项目、标签..." />
       <button type="submit"><i class="fas fa-search"></i></button>
     </form>
-    <section class="cruise-features">
-      <div class="feature-card">
-        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=400&q=80" alt="邮轮体验">
-        <h3>海上奇遇</h3>
-        <p>探索无尽海洋，享受豪华邮轮之旅。</p>
+    <section class="cruise-features" data-aos="fade-up">
+      <div class="feature-card" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=400&q=80" alt="动漫项目">
+        <h3>动漫科技</h3>
+        <p>前沿科技与动漫文化的完美融合</p>
       </div>
-      <div class="feature-card">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=400&q=80" alt="目的地">
-        <h3>全球目的地</h3>
-        <p>从加勒比海到地中海，世界各地等你探索。</p>
+      <div class="feature-card" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=400&q=80" alt="创新项目">
+        <h3>创新体验</h3>
+        <p>探索无限可能，创造独特体验</p>
       </div>
-      <div class="feature-card">
-        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=400&q=80" alt="娱乐活动">
-        <h3>精彩活动</h3>
-        <p>从水上乐园到现场表演，应有尽有。</p>
+      <div class="feature-card" data-aos="zoom-in" data-aos-delay="300">
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=400&q=80" alt="创意项目">
+        <h3>创意无限</h3>
+        <p>激发想象力，展现创意才华</p>
       </div>
     </section>
-    <section class="cards" id="cards">
+    <section class="cards" id="cards" data-aos="fade-up" data-aos-delay="400">
       <% if (projects.length === 0) { %>
         <article class="card-item empty">暂无项目，管理员请先创建一个。</article>
       <% } %>
@@ -43,7 +60,6 @@
       <% }); %>
     </section>
   </main>
-
   <%- include('partials/footer') %>
 </body>
 </html>
