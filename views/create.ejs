@@ -9,13 +9,7 @@
   <script src="https://kit.fontawesome.com/a2e0b9e4f8.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg">
-  <header class="topbar">
-    <div class="brand"><i class="fas fa-fire"></i> 饺子的神奇小窝</div>
-    <nav>
-      <a href="/dashboard">首页</a>
-      <a href="/logout">登出（<%= user.username %>）</a>
-    </nav>
-  </header>
+  <%- include('partials/header', { user: user }) %>
   <main class="content">
     <div class="card">
       <h1>创建新项目</h1>
@@ -54,5 +48,5 @@
       </form>
     </div>
   </main>
-</body>
-</html>
+  <%- include('partials/footer') %>
+

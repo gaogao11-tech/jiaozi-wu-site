@@ -9,6 +9,7 @@
   <script src="https://kit.fontawesome.com/a2e0b9e4f8.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg">
+  <%- include('partials/header', { user: null }) %>
   <div class="card" aria-live="polite">
     <h1>欢迎来到 饺子的神奇小窝</h1>
     <p>首次访问请创建账号。唯一管理员账号：<strong>gys112700</strong></p>
@@ -26,5 +27,6 @@
     </form>
     <p>已有账号？<a href="/login">登录</a></p>
   </div>
+  <%- include('partials/footer') %>
 </body>
 </html>

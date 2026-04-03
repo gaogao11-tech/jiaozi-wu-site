@@ -11,13 +11,7 @@
 <body class="bg">
   <header class="topbar">
     <div class="brand"><i class="fas fa-fire"></i> 饺子的神奇小窝</div>
-    <nav>
-      <a href="/dashboard">首页</a>
-      <a href="/logout">登出（<%= user.username %>）</a>
-    </nav>
-  </header>
-  <main class="content">
-    <article class="detail-card">
+  <%- include('partials/header', { user: user }) %>
       <h1><%= project.title %></h1>
       <p class="subtitle"><%= project.description %></p>
       <img class="wide" src="<%= project.diagramUrl %>" alt="功能示意图" onerror="this.src='/images/default.png';" />
@@ -32,3 +26,5 @@
   </main>
 </body>
 </html>
+  <%- include('partials/footer') %>
+      <p>标签：<%= project.tags.join(', ') %></p>

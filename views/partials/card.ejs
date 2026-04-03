@@ -1,0 +1,20 @@
+<article class="card-item ocean-card">
+  <div class="card-img-wrap">
+    <img src="<%= p.imageUrl %>" alt="项目展示图" onerror="this.src='/images/default.png';" />
+    <div class="img-gradient"></div>
+  </div>
+  <div class="meta">
+    <h2><a href="/projects/<%= p.id %>"><%= p.title %></a></h2>
+    <p><%= p.description %></p>
+    <div class="tags"><%= p.tags.join(', ') %></div>
+    <div class="actions">
+      <a class="btn-secondary" href="<%= p.linkUrl %>" target="_blank" rel="noopener">项目链接</a>
+      <% if (p.videoUrl) { %><a class="btn-secondary" href="<%= p.videoUrl %>" target="_blank" rel="noopener">演示视频</a><% } %>
+      <% if (user && user.role === 'admin') { %>
+        <form method="post" action="/projects/<%= p.id %>/delete" onsubmit="return confirm('确定删除该项目？');" class="inline-form">
+          <button type="submit" class="btn-delete">删除</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</article>
