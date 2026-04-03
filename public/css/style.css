@@ -1,10 +1,10 @@
 :root {
-  --bg: #f8f9fa;
-  --card: rgba(255, 255, 255, 0.98);
-  --border: rgba(0, 102, 204, 0.15);
-  --text: #1a3a52;
-  --accent: #0066cc;
-  --accent2: #0099ff;
+  --bg: #031121;
+  --card: rgba(255, 255, 255, 0.96);
+  --border: rgba(0, 132, 204, 0.25);
+  --text: #f1f5fc;
+  --accent: #00b4ff;
+  --accent2: #0077cc;
 }
 * {
   box-sizing: border-box;
@@ -12,7 +12,10 @@
 body {
   margin: 0;
   font-family: "Segoe UI", "Heiti SC", "PingFang SC", -apple-system, sans-serif;
-  background: linear-gradient(135deg, #003366 0%, #0066cc 25%, #0099ff 50%, #0066cc 75%, #003366 100%);
+  background: linear-gradient(to bottom, rgba(2,11,39,0.9), rgba(0, 35, 80, 0.65)),
+              url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2100&q=80');
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
   color: var(--text);
   min-height: 100vh;
@@ -27,17 +30,10 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.03) 0px,
-      rgba(255, 255, 255, 0.03) 2px,
-      transparent 2px,
-      transparent 4px
-    );
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18), transparent 40%),
+              radial-gradient(circle at 80% 25%, rgba(255, 255, 255, 0.12), transparent 35%);
   pointer-events: none;
   z-index: 1;
-  animation: wave 8s ease-in-out infinite;
 }
 
 @keyframes wave {
@@ -58,6 +54,14 @@ body::after {
 }
 .bg {
   min-height: 100vh;
+  background: transparent;
+}
+.card {
+  background: rgba(10, 28, 67, 0.88);
+  border: 1px solid rgba(120, 182, 235, 0.35);
+  color: #f4f8ff;
+}
+
 }
 
 .topbar {
@@ -328,4 +332,156 @@ input:focus, textarea:focus {
   .card, .detail-card, .hero, .search { margin: 12px 6px; padding: 20px; }
   .btn, .btn-secondary { padding: 10px 16px; font-size: .9rem; }
   .brand { font-size: 1.1rem; }
+}
+
+/* --- Norwegian Cruise Ocean Theme --- */
+.ocean-hero {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  overflow: hidden;
+  margin-bottom: 0;
+  padding: 0;
+}
+.hero-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+.hero-ocean {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) saturate(1.2) blur(1px);
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 1;
+}
+.hero-wave {
+  width: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 2;
+  opacity: 0.85;
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+  padding: 80px 24px 60px 24px;
+}
+.ocean-hero h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  text-shadow: 0 8px 32px rgba(0,51,102,0.25);
+}
+.ocean-hero p {
+  font-size: 1.25rem;
+  margin-bottom: 32px;
+  text-shadow: 0 2px 8px rgba(0,51,102,0.18);
+}
+.btn-lg {
+  font-size: 1.15rem;
+  padding: 18px 44px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, #0099ff, #0066cc 80%);
+  box-shadow: 0 8px 32px rgba(0,102,204,0.18);
+}
+.btn-lg:hover {
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: 0 16px 48px rgba(0,102,204,0.28);
+}
+
+.ocean-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,102,204,0.13);
+  background: rgba(255,255,255,0.98);
+  border: 1.5px solid rgba(0,102,204,0.13);
+  transition: all .5s cubic-bezier(0.34,1.56,0.64,1);
+}
+.ocean-card:hover {
+  transform: translateY(-18px) scale(1.03);
+  box-shadow: 0 24px 64px rgba(0,102,204,0.22);
+  border-color: #0099ff44;
+}
+.card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+}
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s cubic-bezier(0.34,1.56,0.64,1);
+}
+.ocean-card:hover .card-img-wrap img {
+  transform: scale(1.08) rotate(-1deg);
+}
+.img-gradient {
+  position: absolute;
+  left: 0; bottom: 0; width: 100%; height: 60%;
+  background: linear-gradient(to top, rgba(0,102,204,0.18) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+.footer-cols {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto 18px auto;
+  flex-wrap: wrap;
+}
+.footer-cols > div {
+  flex: 1 1 180px;
+}
+.footer-cols h4 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.footer-cols ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+.footer-cols ul li {
+  margin-bottom: 6px;
+}
+.footer-cols ul a {
+  color: #e0f3ff;
+  text-decoration: none;
+  font-size: 0.97rem;
+  transition: color .2s;
+}
+.footer-cols ul a:hover {
+  color: #fff;
+}
+.footer-social a {
+  color: #e0f3ff;
+  font-size: 1.4rem;
+  margin-right: 16px;
+  transition: color .2s;
+}
+.footer-social a:hover {
+  color: #fff;
+}
+@media (max-width: 900px) {
+  .footer-cols { flex-direction: column; gap: 0; }
+  .footer-cols > div { margin-bottom: 18px; }
+  .ocean-hero h1 { font-size: 2rem; }
+  .hero-content { padding: 48px 8px 32px 8px; }
 }
