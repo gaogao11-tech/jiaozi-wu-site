@@ -22,7 +22,7 @@
       <% if (error) { %>
         <div class="error"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
       <% } %>
-      <form method="post" action="/create">
+      <form method="post" action="/create" enctype="multipart/form-data">
         <label>项目名称</label>
         <input type="text" name="title" required />
 
@@ -31,15 +31,21 @@
 
         <label>项目展示图 URL</label>
         <input type="url" name="imageUrl" placeholder="可选" />
+        <label>本地项目展示图上传（优先）</label>
+        <input type="file" name="imageFile" accept="image/*" />
 
         <label>功能示意图 URL</label>
         <input type="url" name="diagramUrl" placeholder="可选" />
+        <label>本地功能示意图上传（优先）</label>
+        <input type="file" name="diagramFile" accept="image/*" />
 
         <label>项目链接</label>
         <input type="url" name="linkUrl" required />
 
         <label>演示视频 URL</label>
         <input type="url" name="videoUrl" placeholder="可选" />
+        <label>本地视频文件上传（优先）</label>
+        <input type="file" name="videoFile" accept="video/*" />
 
         <label>标签（逗号分隔）</label>
         <input type="text" name="tags" placeholder="例如: 动漫, 科技" />

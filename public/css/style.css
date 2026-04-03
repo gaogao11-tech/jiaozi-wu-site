@@ -1,10 +1,10 @@
 :root {
-  --bg: #050a15;
-  --card: rgba(14, 18, 38, .85);
-  --border: rgba(84, 220, 255, 0.35);
+  --bg: #070a1e;
+  --card: rgba(16, 23, 50, .85);
+  --border: rgba(84, 220, 255, 0.40);
   --text: #e4f9ff;
-  --accent: #5c8fff;
-  --accent2: #81ffb4;
+  --accent: #4dafd3;
+  --accent2: #85ffb4;
 }
 * {
   box-sizing: border-box;
@@ -12,13 +12,38 @@
 body {
   margin: 0;
   font-family: "Segoe UI", "Heiti SC", "PingFang SC", sans-serif;
-  background: radial-gradient(circle at top, #0f1836 0%, #02040f 60%);
+  background: linear-gradient(rgba(5, 10, 25, 0.52), rgba(3, 6, 18, 0.72)), url('https://images.unsplash.com/photo-1485904097382-191b6f6456d2?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
   color: var(--text);
   min-height: 100vh;
+  overflow-x: hidden;
+  animation: huerotate 35s infinite linear;
+}
+@keyframes huerotate {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
 }
 .bg {
   min-height: 100vh;
 }
+
+body::before {
+  content: '';
+  position: fixed;
+  left: -50%;
+  top: -30%;
+  width: 220%;
+  height: 220%;
+  background: radial-gradient(circle, rgba(66, 133, 244, 0.12), transparent 48%);
+  z-index: -2;
+  pointer-events: none;
+  animation: drift 32s linear infinite;
+}
+
+@keyframes drift {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(20vw) translateY(16vh); }
+}
+
 .topbar {
   display: flex;
   align-items: center;
@@ -88,10 +113,14 @@ input:focus, textarea:focus {
   cursor: pointer;
   font-weight: 700;
   margin-top: 14px;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 .btn { background: linear-gradient(120deg, #4f76ff, #29ffc2); }
 .btn-secondary { background: rgba(63, 105, 220, .72); text-decoration: none; }
-.btn:hover, .btn-secondary:hover { opacity: .92; }
+.btn:hover, .btn-secondary:hover { opacity: .92; transform: translateY(-1px); box-shadow: 0 8px 25px rgba(59, 151, 255, .3); }
+.inline-form { display: inline-block; margin-left: 8px; }
+.btn-delete { background: linear-gradient(120deg, #ff4f80, #f65f14); padding: 8px 12px; font-size: .85rem; }
+
 .error {
   color: #ff9696;
   background: rgba(199, 57, 57, .18);

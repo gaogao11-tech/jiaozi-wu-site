@@ -42,6 +42,11 @@
             <div class="actions">
               <a class="btn-secondary" href="<%= p.linkUrl %>" target="_blank" rel="noopener">项目链接</a>
               <% if (p.videoUrl) { %><a class="btn-secondary" href="<%= p.videoUrl %>" target="_blank" rel="noopener">演示视频</a><% } %>
+              <% if (user && user.role === 'admin') { %>
+                <form method="post" action="/projects/<%= p.id %>/delete" onsubmit="return confirm('确定删除该项目？');" class="inline-form">
+                  <button type="submit" class="btn-delete">删除</button>
+                </form>
+              <% } %>
             </div>
           </div>
         </article>

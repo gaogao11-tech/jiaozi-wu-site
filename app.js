@@ -6,6 +6,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const helmet = require('helmet');
 const cors = require('cors');
+const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
@@ -15,6 +16,19 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+const uploadDir = path.join(__dirname, 'public', 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => cb(null, uploadDir),
+    filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname.replace(/\s+/g, '_')}`)
+  }),
+  limits: { fileSize: 30 * 1024 * 1024 }
+});
 
 const DATA_FILE = path.join(__dirname, 'data.json');
 const { MongoClient } = require('mongodb');
@@ -248,25 +262,46 @@ app.get('/create', requireLogin, requireAdmin, (req, res) => {
   res.render('create', { error: null });
 });
 
-app.post('/create', requireLogin, requireAdmin, async (req, res) => {
+app.post('/create', requireLogin, requireAdmin, upload.fields([
+  { name: 'imageFile', maxCount: 1 },
+  { name: 'diagramFile', maxCount: 1 },
+  { name: 'videoFile', maxCount: 1 }
+]), async (req, res) => {
   const { title, description, imageUrl, diagramUrl, linkUrl, videoUrl, tags } = req.body;
   if (!title || !description || !linkUrl) {
     return res.render('create', { error: '项目名称、描述、链接为必填。' });
   }
+
+  const imageFile = req.files?.imageFile?.[0];
+  const diagramFile = req.files?.diagramFile?.[0];
+  const videoFile = req.files?.videoFile?.[0];
+
   const project = {
     id: uuidv4(),
     title,
     description,
-    imageUrl: imageUrl || '/images/default.png',
-    diagramUrl: diagramUrl || '/images/default.png',
+    imageUrl: imageFile ? `/uploads/${path.basename(imageFile.path)}` : (imageUrl || '/images/default.png'),
+    diagramUrl: diagramFile ? `/uploads/${path.basename(diagramFile.path)}` : (diagramUrl || '/images/default.png'),
     linkUrl,
-    videoUrl,
+    videoUrl: videoFile ? `/uploads/${path.basename(videoFile.path)}` : (videoUrl || ''),
     tags: tags ? tags.split(',').map((s) => s.trim()) : [],
     createdAt: new Date().toISOString()
   };
+
   data.projects.push(project);
   saveData(data);
   await syncProjectToMongo(project);
+  syncData();
+  res.redirect('/dashboard');
+});
+
+app.post('/projects/:id/delete', requireLogin, requireAdmin, async (req, res) => {
+  const projectId = req.params.id;
+  data.projects = data.projects.filter((p) => p.id !== projectId);
+  saveData(data);
+  if (projectsColl) {
+    await projectsColl.deleteOne({ id: projectId });
+  }
   syncData();
   res.redirect('/dashboard');
 });
