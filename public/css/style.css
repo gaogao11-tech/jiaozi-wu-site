@@ -12,7 +12,7 @@
 body {
   margin: 0;
   font-family: "Segoe UI", "Heiti SC", "PingFang SC", sans-serif;
-  background: linear-gradient(rgba(5, 10, 25, 0.52), rgba(3, 6, 18, 0.72)), url('https://images.unsplash.com/photo-1485904097382-191b6f6456d2?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+  background: linear-gradient(rgba(5, 10, 25, 0.62), rgba(3, 6, 18, 0.78)), url('https://images.pexels.com/photos/3964619/pexels-photo-3964619.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat fixed;
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
