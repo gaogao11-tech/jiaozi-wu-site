@@ -12,33 +12,53 @@
 body {
   margin: 0;
   font-family: "Segoe UI", "Heiti SC", "PingFang SC", -apple-system, sans-serif;
-  background: linear-gradient(135deg, rgba(0, 51, 102, 0.85) 0%, rgba(0, 102, 204, 0.8) 50%, rgba(51, 153, 255, 0.75) 100%), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+  background: linear-gradient(135deg, #003366 0%, #0066cc 25%, #0099ff 50%, #0066cc 75%, #003366 100%);
+  background-attachment: fixed;
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
-}
-.bg {
-  min-height: 100vh;
+  position: relative;
 }
 
 body::before {
   content: '';
   position: fixed;
-  left: -50%;
-  top: -30%;
-  width: 220%;
-  height: 220%;
-  background: radial-gradient(circle, rgba(255, 192, 203, 0.15), transparent 48%);
-  z-index: -2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 2px,
+      transparent 2px,
+      transparent 4px
+    );
   pointer-events: none;
-  animation: drift 32s linear infinite;
+  z-index: 1;
+  animation: wave 8s ease-in-out infinite;
 }
 
-@keyframes drift {
-  0% { transform: translateX(0) translateY(0); }
-  100% { transform: translateX(20vw) translateY(16vh); }
+@keyframes wave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
 }
 
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, rgba(0, 51, 102, 0.6), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+.bg {
+  min-height: 100vh;
+}
 
 .topbar {
   display: flex;
@@ -87,11 +107,12 @@ body::before {
   border: 1px solid var(--border);
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 102, 204, 0.12);
-  transition: all .4s ease;
+  transition: all .5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .card:hover, .detail-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0, 102, 204, 0.18);
+  transform: translateY(-12px) scale(1.01);
+  box-shadow: 0 20px 60px rgba(0, 102, 204, 0.25);
+  border-color: rgba(0, 102, 204, 0.3);
 }
 .card h1, .detail-card h1, .hero h1 {
   margin-top: 0;
@@ -143,29 +164,42 @@ input:focus, textarea:focus {
 }
 .btn { 
   background: linear-gradient(135deg, #0066cc, #0099ff);
+  transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .btn-secondary { 
   background: rgba(0, 102, 204, 0.85);
   color: #fff;
   text-decoration: none;
+  transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(0, 102, 204, .45);
+  transform: translateY(-5px) scale(1.06);
+  box-shadow: 0 12px 36px rgba(0, 102, 204, .5);
+}
+.btn:active {
+  transform: translateY(-2px) scale(1.03);
 }
 .btn-secondary:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px) scale(1.06);
   background: var(--accent);
-  box-shadow: 0 8px 28px rgba(0, 102, 204, .35);
+  box-shadow: 0 12px 36px rgba(0, 102, 204, .4);
+}
+.btn-secondary:active {
+  transform: translateY(-2px) scale(1.03);
 }
 .inline-form { display: inline-block; }
 .btn-delete { 
   background: linear-gradient(135deg, #cc3333, #ff6666);
   padding: 10px 18px;
   font-size: .85rem;
+  transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .btn-delete:hover {
-  box-shadow: 0 8px 28px rgba(204, 51, 51, .35);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 32px rgba(204, 51, 51, .4);
+}
+.btn-delete:active {
+  transform: translateY(-2px) scale(1.02);
 }
 
 .error {
@@ -192,18 +226,21 @@ input:focus, textarea:focus {
 .search button {
   width: 54px;
   border-radius: 8px;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), #0099ff);
   border: none;
   color: white;
   font-weight: 700;
   box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
-  transition: all .3s ease;
+  transition: all .4s ease;
   cursor: pointer;
 }
 .search button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 22px rgba(0, 102, 204, .4);
-  background: #0052a3;
+  transform: translateY(-5px) scale(1.08);
+  box-shadow: 0 10px 30px rgba(0, 102, 204, 0.45);
+  background: linear-gradient(135deg, #0052a3, #0077cc);
+}
+.search button:active {
+  transform: translateY(-2px) scale(1.05);
 }
 .cards {
   display: grid;
@@ -215,13 +252,13 @@ input:focus, textarea:focus {
   border: 1px solid rgba(0, 102, 204, 0.1);
   border-radius: 10px;
   overflow: hidden;
-  transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all .5s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow: 0 4px 20px rgba(0, 102, 204, 0.08);
 }
 .card-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 40px rgba(0, 102, 204, 0.16);
-  border-color: rgba(0, 102, 204, 0.2);
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 16px 50px rgba(0, 102, 204, 0.22);
+  border-color: rgba(0, 102, 204, 0.3);
 }
 .card-item img { 
   width: 100%; 
